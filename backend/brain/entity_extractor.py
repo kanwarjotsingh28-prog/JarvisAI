@@ -4,18 +4,31 @@ class EntityExtractor:
 
         command = command.lower()
 
-        applications = [
-            "chrome",
-            "notepad",
-            "calculator",
-            "paint",
-            "spotify",
-            "vscode",
-            "edge"
-        ]
+        aliases = {
 
-        for app in applications:
-            if app in command:
+            "google chrome": "chrome",
+            "chrome": "chrome",
+
+            "visual studio code": "vscode",
+            "vs code": "vscode",
+            "vscode": "vscode",
+
+            "microsoft edge": "edge",
+            "edge": "edge",
+
+            "notepad": "notepad",
+
+            "calculator": "calculator",
+            "calc": "calculator",
+
+            "paint": "paint",
+
+            "spotify": "spotify"
+        }
+
+        for alias, app in aliases.items():
+
+            if alias in command:
                 return app
 
         return None
