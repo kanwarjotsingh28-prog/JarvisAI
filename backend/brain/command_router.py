@@ -2,20 +2,17 @@ class CommandRouter:
 
     def route(self, intent):
 
-        routes = {
+        if intent == "OPEN_APPLICATION":
+            return "Automation Module"
 
-            "OPEN_APPLICATION": "Automation Module",
+        elif intent == "WEB_SEARCH":
+            return "Automation Module"
 
-            "SEARCH": "Search Module",
+        elif intent == "GET_WEATHER":
+            return "Automation Module"
 
-            "GET_TIME": "Time Module",
+        elif intent == "SAVE_MEMORY":
+            return "Memory Module"
 
-            "GET_WEATHER": "Weather Module",
-
-            "SAVE_MEMORY": "Memory Module",
-
-            "GREETING": "Conversation Module"
-
-        }
-
-        return routes.get(intent, "Unknown Module")
+        else:
+            return "AI Module"

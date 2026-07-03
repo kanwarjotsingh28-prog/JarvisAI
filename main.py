@@ -1,13 +1,11 @@
-from backend.brain.brain import Brain
-from backend.automation.automation import Automation
+from backend.core.jarvis import JarvisCore
 
 
 class Jarvis:
 
     def __init__(self):
 
-        self.brain = Brain()
-        self.automation = Automation()
+        self.jarvis = JarvisCore()
 
     def start(self):
 
@@ -24,7 +22,7 @@ class Jarvis:
                 print("\nGoodbye!")
                 break
 
-            result = self.brain.think(command)
+            result = self.jarvis.execute(command)
 
             print("\nJarvis Analysis")
             print("-" * 40)
@@ -34,15 +32,10 @@ class Jarvis:
             print(f"Search Engine  : {result['search_engine']}")
             print(f"Search Query   : {result['search_query']}")
             print(f"Destination    : {result['destination']}")
+            if "response" in result:
+               print()
+               print(result["response"])
             print()
-
-            self.automation.execute(
-                result["intent"],
-                result["entity"],
-                result["search_engine"],
-                result["search_query"]
-            )
-
 
 if __name__ == "__main__":
 
