@@ -1,7 +1,4 @@
 class IntentDetector:
-    """
-    Detects the user's intent from a text command.
-    """
 
     def detect(self, command: str):
 
@@ -9,6 +6,9 @@ class IntentDetector:
 
         if any(word in command for word in ["open", "launch", "start"]):
             return "OPEN_APPLICATION"
+
+        elif any(word in command for word in ["search", "find", "look up"]):
+            return "SEARCH"
 
         elif any(word in command for word in ["weather", "temperature"]):
             return "GET_WEATHER"
@@ -22,5 +22,4 @@ class IntentDetector:
         elif any(word in command for word in ["hello", "hi", "hey"]):
             return "GREETING"
 
-        else:
-            return "UNKNOWN"
+        return "UNKNOWN"
