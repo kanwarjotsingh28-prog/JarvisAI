@@ -23,12 +23,34 @@ class EntityExtractor:
 
             "paint": "paint",
 
-            "spotify": "spotify"
+            "spotify": "spotify",
+
+            "youtube": "youtube",
+
+            "chatgpt": "chatgpt",
+
+            "github": "github",
+
+            "gmail": "gmail",
+
+            "google": "google",
+
+            "linkedin": "linkedin",
+
+            "instagram": "instagram",
+
+            "facebook": "facebook",
+
+            "twitter": "twitter",
+
+            "x": "x"
+
         }
 
-        for alias, app in aliases.items():
+        for alias, entity in aliases.items():
 
             if alias in command:
-                return app
+
+                return entity
 
         return None
