@@ -1,6 +1,6 @@
+import os
 import sounddevice as sd
 from scipy.io.wavfile import write
-import os
 
 
 class Recorder:
@@ -8,7 +8,6 @@ class Recorder:
     def __init__(self):
 
         self.sample_rate = 16000
-        self.duration = 5
 
         self.output_path = os.path.join(
             "data",
@@ -16,12 +15,12 @@ class Recorder:
             "command.wav"
         )
 
-    def record(self):
+    def record(self, duration=3):
 
-        print("\n🎤 Recording...")
+        print("\n🎤 Listening...")
 
         audio = sd.rec(
-            int(self.duration * self.sample_rate),
+            int(duration * self.sample_rate),
             samplerate=self.sample_rate,
             channels=1,
             dtype="int16"
@@ -34,7 +33,5 @@ class Recorder:
             self.sample_rate,
             audio
         )
-
-        print("✅ Recording complete.")
 
         return self.output_path

@@ -1,6 +1,6 @@
-from backend.core.assistant import Assistant
+mode = input("\nMode (voice/text): ").strip().lower()
 
-
-assistant = Assistant()
-
-assistant.run()
+if mode == "voice":
+    command = self.voice.listen()
+else:
+    command = input("You: ")
