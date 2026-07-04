@@ -8,6 +8,10 @@ class Settings:
 
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-    Settings.RECORD_DURATION
-    Settings.SAMPLE_RATE
-    Settings.VOICE_RATE
+    WHISPER_MODEL = "base"
+
+    SAMPLE_RATE = 16000
+
+    VOICE_RATE = 180
+
+    RECORD_DURATION = 3

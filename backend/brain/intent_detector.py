@@ -21,5 +21,11 @@ class IntentDetector:
 
         elif any(word in command for word in ["hello", "hi", "hey"]):
             return "GREETING"
+        
+        if "remember" in command:
+            return "SAVE_MEMORY"
+        
+        if "what is my" in command or "what's my" in command:
+            return "RECALL_MEMORY"
 
         return "UNKNOWN"

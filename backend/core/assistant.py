@@ -9,36 +9,36 @@ class Assistant:
         self.voice = VoiceManager()
         self.jarvis = JarvisCore()
 
-    def run(self):
+    def text_mode(self):
 
-        print("=" * 60)
-        print("                JARVIS AI")
-        print("=" * 60)
+        print("\n===== TEXT MODE =====")
 
         while True:
 
-            mode = input("\nMode (voice/text): ").strip().lower()
+            command = input("\nYou: ")
 
-            if mode == "voice":
+            if command.lower() == "exit":
+                break
 
-                print("\nListening...")
+            result = self.jarvis.execute(command)
 
-                command = self.voice.listen()
+            if result.get("response"):
+                print(f"\nJarvis: {result['response']}")
 
-            elif mode == "text":
+    def voice_mode(self):
 
-                command = input("You: ")
+        print("\n===== VOICE MODE =====")
 
-            else:
+        while True:
 
-                print("Please type 'voice' or 'text'.")
-                continue
+            print("\n🎤 Listening...")
+
+            command = self.voice.listen()
 
             if not command:
                 continue
 
             if command.lower() == "exit":
-                print("Goodbye!")
                 break
 
             print(f"\nYou: {command}")
@@ -47,3 +47,29 @@ class Assistant:
 
             if result.get("response"):
                 print(f"\nJarvis: {result['response']}")
+
+    def run(self):
+
+        while True:
+
+            print("\n" + "=" * 60)
+            print("                    JARVIS AI")
+            print("=" * 60)
+            print("1. Voice Assistant")
+            print("2. Text Assistant")
+            print("3. Exit")
+
+            choice = input("\nSelect Mode: ")
+
+            if choice == "1":
+                self.voice_mode()
+
+            elif choice == "2":
+                self.text_mode()
+
+            elif choice == "3":
+                print("\nGoodbye!")
+                break
+
+            else:
+                print("\nInvalid option.")
