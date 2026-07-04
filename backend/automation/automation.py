@@ -1,6 +1,7 @@
 from backend.automation.app_launcher import AppLauncher
 from backend.automation.web_launcher import WebLauncher
 from backend.automation.search_engine import SearchEngine
+from backend.voice.speaker import Speaker
 
 
 class Automation:
@@ -10,6 +11,7 @@ class Automation:
         self.launcher = AppLauncher()
         self.web = WebLauncher()
         self.search = SearchEngine()
+        self.speaker = Speaker()
 
     def execute(
         self,
@@ -68,6 +70,17 @@ class Automation:
         success = self.launcher.launch(entity)
 
         if success:
-            print(f"Opening {entity}...")
+
+            message = f"Opening {entity}"
+
+            print(message)
+
+            self.speaker.speak(message)
+
         else:
-            print(f"Couldn't open {entity}.")
+
+            message = f"I couldn't open {entity}"
+
+            print(message)
+
+            self.speaker.speak(message)
