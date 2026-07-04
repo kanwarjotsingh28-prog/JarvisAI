@@ -12,21 +12,38 @@ class Assistant:
     def run(self):
 
         print("=" * 60)
-        print("                 JARVIS AI")
+        print("                JARVIS AI")
         print("=" * 60)
 
         while True:
 
-            print("\nListening...")
+            mode = input("\nMode (voice/text): ").strip().lower()
 
-            command = self.voice.listen()
+            if mode == "voice":
+
+                print("\nListening...")
+
+                command = self.voice.listen()
+
+            elif mode == "text":
+
+                command = input("You: ")
+
+            else:
+
+                print("Please type 'voice' or 'text'.")
+                continue
 
             if not command:
                 continue
 
-            print(f"\nYou: {command}")
-
             if command.lower() == "exit":
+                print("Goodbye!")
                 break
 
-            self.jarvis.execute(command)
+            print(f"\nYou: {command}")
+
+            result = self.jarvis.execute(command)
+
+            if result.get("response"):
+                print(f"\nJarvis: {result['response']}")

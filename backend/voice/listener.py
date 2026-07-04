@@ -1,17 +1,28 @@
-def listen(self):
+from backend.voice.recorder import Recorder
+from backend.voice.transcriber import Transcriber
 
-    audio = self.recorder.record(duration=3)
 
-    print("🧠 Understanding...")
+class Listener:
 
-    text = self.transcriber.transcribe(audio)
+    def __init__(self):
 
-    if text:
+        self.recorder = Recorder()
+        self.transcriber = Transcriber()
 
-        text = text.strip()
+    def listen(self):
 
-        print(f"You said: {text}")
+        audio = self.recorder.record(duration=3)
 
-        return text
+        print("\n🧠 Understanding...\n")
 
-    return None
+        text = self.transcriber.transcribe(audio)
+
+        if text:
+
+            text = text.strip()
+
+            print(f"🗣 You said: {text}\n")
+
+            return text
+
+        return None
