@@ -19,9 +19,7 @@ class CommandProcessor:
 
         result = self.brain.think(command)
 
-        # -------------------------
-        # MEMORY : SAVE
-        # -------------------------
+        # MEMORY SAVE
         if result["intent"] == "SAVE_MEMORY":
 
             response = self.memory.save(command)
@@ -32,44 +30,18 @@ class CommandProcessor:
 
             return result
 
-        # -------------------------
-        # MEMORY : RECALL
-        # -------------------------
+        # MEMORY RECALL
         if result["intent"] == "RECALL_MEMORY":
 
-            command_lower = command.lower()
+            value = self.memory.recall(command)
 
-            if "name" in command_lower:
-                key = "name"
+            result["response"] = value
 
-            elif "language" in command_lower:
-                key = "favorite_language"
-
-            else:
-                key = None
-
-            if key is None:
-
-                response = "I don't know what you want me to remember."
-
-            else:
-
-                value = self.memory.recall(key)
-
-                if value is None:
-                    response = "I don't know that yet."
-                else:
-                    response = f"Your {key.replace('_', ' ')} is {value}."
-
-            result["response"] = response
-
-            self.speaker.speak(response)
+            self.speaker.speak(value)
 
             return result
 
-        # -------------------------
         # AI
-        # -------------------------
         if result["destination"] == "AI Module":
 
             response = self.ai.ask(command)
@@ -80,9 +52,7 @@ class CommandProcessor:
 
             return result
 
-        # -------------------------
         # AUTOMATION
-        # -------------------------
         self.automation.execute(
             result["intent"],
             result["entity"],

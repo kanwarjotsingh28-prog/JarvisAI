@@ -27,5 +27,14 @@ class IntentDetector:
         
         if "what is my" in command or "what's my" in command:
             return "RECALL_MEMORY"
+        
+        if "remember" in command:
+            return "SAVE_MEMORY"
+
+        if (
+            "what's my" in command
+            or "what is my" in command
+    ):
+            return "RECALL_MEMORY"
 
         return "UNKNOWN"

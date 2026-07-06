@@ -19,6 +19,12 @@ class CommandRouter:
 
         elif intent == "RECALL_MEMORY":
             return "Memory Module"
+        
+        elif intent == "SAVE_MEMORY":
+            return "Memory Module"
+
+        elif intent == "RECALL_MEMORY":
+            return "Memory Module"
 
         else:
             return "AI Module"

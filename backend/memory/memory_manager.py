@@ -6,10 +6,11 @@ class MemoryManager:
 
     def __init__(self):
 
-        self.file = os.path.join(
-            "data",
-            "memory.json"
-        )
+        self.file = os.path.join("data", "memory.json")
+
+        if not os.path.exists(self.file):
+            with open(self.file, "w") as f:
+                json.dump({}, f)
 
     def load(self):
 

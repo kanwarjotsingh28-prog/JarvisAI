@@ -1,25 +1,125 @@
+import json
+
+from backend.ai.ai_manager import AIManager
+
+
 class MemoryExtractor:
+
+    def __init__(self):
+
+        self.ai = AIManager()
 
     def extract(self, command):
 
-        command = command.lower()
+        prompt = f"""
+You are JARVIS's memory extraction system.
 
-        if "my name is" in command:
+Your job is to extract ONE memory from the user's sentence.
 
-            value = command.split("my name is")[-1].strip()
+Return ONLY valid JSON.
 
-            return {
-                "key": "name",
-                "value": value
-            }
+Examples
 
-        if "my favourite language is" in command:
+User:
+Remember that my name is Kanwarjot.
 
-            value = command.split("my favourite language is")[-1].strip()
+Output:
+{{
+    "key": "name",
+    "value": "Kanwarjot"
+}}
 
-            return {
-                "key": "favorite_language",
-                "value": value
-            }
+User:
+Remember that I was born in Amritsar.
 
-        return None
+Output:
+{{
+    "key": "birth_city",
+    "value": "Amritsar"
+}}
+
+User:
+Remember that my laptop has an Intel Core i3 5th Gen processor.
+
+Output:
+{{
+    "key": "laptop_cpu",
+    "value": "Intel Core i3 5th Gen processor"
+}}
+
+Sentence:
+
+{command}
+"""
+
+        response = self.ai.ask(
+            prompt,
+            save_history=False
+        )
+
+        try:
+
+            start = response.find("{")
+            end = response.rfind("}") + 1
+
+            return json.loads(response[start:end])
+
+        except Exception:
+
+            return None
+
+    def extract_recall_key(self, command):
+
+        prompt = f"""
+You are JARVIS.
+
+The user wants to recall a memory.
+
+Return ONLY JSON.
+
+Example
+
+User:
+What's my name?
+
+Output:
+{{
+    "key":"name"
+}}
+
+User:
+Where was I born?
+
+Output:
+{{
+    "key":"birth_city"
+}}
+
+User:
+What processor does my laptop have?
+
+Output:
+{{
+    "key":"laptop_cpu"
+}}
+
+Sentence:
+
+{command}
+"""
+
+        response = self.ai.ask(
+            prompt,
+            save_history=False
+        )
+
+        try:
+
+            start = response.find("{")
+            end = response.rfind("}") + 1
+
+            return json.loads(response[start:end])
+
+        except Exception:
+
+            return None
