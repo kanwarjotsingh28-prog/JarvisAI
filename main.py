@@ -1,6 +1,6 @@
-from backend.core.assistant import Assistant
+from frontend.gui import JarvisGUI
 
 
-assistant = Assistant()
+gui = JarvisGUI()
 
-assistant.run()
+gui.run()
